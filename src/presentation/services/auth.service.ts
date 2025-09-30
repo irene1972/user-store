@@ -1,5 +1,5 @@
 import { UserModel } from "../../data";
-import { CustomError, RegisterUserDto } from "../../domain";
+import { CustomError, RegisterUserDto, UserEntity } from "../../domain";
 
 export class AuthService{
 
@@ -20,9 +20,17 @@ export class AuthService{
 
             //todo: mandar el email de confirmación
 
-            return user;
+            const {password,...userEntity}=UserEntity.fromObject(user);
+
+            return {
+                user:userEntity,
+                token:'ABC'
+            };
+
         } catch (error) {
+
             throw CustomError.internalServer(`${error}`);
+
         }
 
     }
