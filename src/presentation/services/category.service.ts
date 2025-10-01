@@ -1,3 +1,4 @@
+import { transcode } from 'buffer';
 import { CategoryModel } from '../../data';
 import { CreateCategoryDto, CustomError, UserEntity } from '../../domain';
 
@@ -42,6 +43,18 @@ export class CategoryService {
 
   async getCategories() {
 
+    try {
+        const categories = await CategoryModel.find();
+
+        return categories.map(category=>({
+            id:category.id,
+            name:category.name,
+            available:category.available
+        }));
+
+    } catch (error) {
+        throw CustomError.internalServer('Internal Server Error');
+    }
 
   }
 
