@@ -40,7 +40,9 @@ export class ProductService {
           ProductModel.find()
           .skip((page-1)*limit)
           .limit(limit)
-          //todo:populate
+          .populate('user')
+          //.populate('user','name email')
+          .populate('category')
         ]);
 
         return {
