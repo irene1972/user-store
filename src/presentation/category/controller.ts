@@ -12,9 +12,12 @@ export class CategoryController{
     }
 
     createCategory=async(req:Request,res:Response)=>{
+        /*
         const [error,createCategoryDto]=CreateCategoryDto.create(req.body);
         if(error) return res.status(400).json({error});
         res.json(createCategoryDto);
+        */
+       res.json(req.body);
     }
 
     getCategories=async(req:Request,res:Response)=>{

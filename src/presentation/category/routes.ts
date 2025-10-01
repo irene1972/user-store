@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { CategoryController } from './controller';
+import { AuthMidelware } from '../midelwares/auth.midleware';
 
 
 export class CategoryRoutes {
@@ -12,7 +13,7 @@ export class CategoryRoutes {
     
     // Definir las rutas
     router.get('/', controller.getCategories );
-    router.post('/', controller.createCategory );
+    router.post('/', [AuthMidelware.validateJWT],controller.createCategory );
 
 
 
