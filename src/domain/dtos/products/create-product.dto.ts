@@ -1,3 +1,5 @@
+import { Validatos } from "../../../config";
+
 export class CreateProductDto{
 
     private constructor(
@@ -16,9 +18,8 @@ export class CreateProductDto{
         if(!name) return ['Missing name'];
         if(!user) return ['Missing user'];
         if(!category) return ['Missing category'];
-        
-
-
+        if(!Validatos.isMongoID(user)) return ['Invalid User ID'];
+        if(!Validatos.isMongoID(category)) return ['Invalid Category ID'];
 
         return [undefined,new CreateProductDto(
             name,
