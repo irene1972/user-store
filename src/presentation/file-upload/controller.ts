@@ -26,10 +26,11 @@ export class FileUploadController {
     const validTypes=['users','products','categories'];
     if(!validTypes.includes(type))
       throw res.status(400).json({error:`Invalid argument type: ${type}, valid ones: ${validTypes}`});
-
+    /*
     if(!req.files || Object.keys(req.files).length===0){
       return res.status(400).json({error:'No files were selected'});
     }
+    */
   
     const file=req.files.file as UploadedFile;
 
