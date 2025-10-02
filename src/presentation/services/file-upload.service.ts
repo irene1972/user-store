@@ -46,12 +46,16 @@ export class FileUploadService{
         }
     }
 
-    public uploadMultiple(
-        file:UploadedFile[],
+    async uploadMultiple(
+        files:UploadedFile[],
         folder:string='uploads',
         validExtensions:string[]=['png','jpg','jpeg','gif']
     ){
-        throw new Error('Not implemented');
+        const fileNames=await Promise.all(
+            files.map(file=>this.uploadSingle(file,folder,validExtensions))
+        );
+
+        return fileNames;
     }
 
 
