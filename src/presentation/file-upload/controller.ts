@@ -1,11 +1,13 @@
 import { Response, Request } from 'express';
 import { CustomError } from '../../domain';
+import { FileUploadService } from '../services/file-upload.service';
+import { UploadedFile } from 'express-fileupload';
 
 export class FileUploadController {
 
   // DI
   constructor(
-    //private readonly categoryService: CategoryService,
+    private readonly fileUploadService: FileUploadService,
   ) { }
 
 
@@ -21,7 +23,19 @@ export class FileUploadController {
 
   uploadFile = ( req: Request, res: Response ) => {
 
-    res.json('upload file');
+    const files=req.files;
+
+    if(!files || Object.keys(files).length===0){
+      return res.status(400).json({error:'No files were selected'});
+    }
+  
+    const file=files.file as UploadedFile;
+
+    this.fileUploadService.uploadSingle(file)
+      .then(uploaded=>res.json(uploaded))
+      .catch(error=>this.handleError(error,res));
+    //console.log(req.files);
+    //res.json('upload file');
 
   };
 
