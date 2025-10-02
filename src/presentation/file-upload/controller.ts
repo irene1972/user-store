@@ -23,9 +23,12 @@ export class FileUploadController {
   uploadFile = ( req: Request, res: Response ) => {
 
     const type=req.params.type;
+    /*
     const validTypes=['users','products','categories'];
     if(!validTypes.includes(type))
       throw res.status(400).json({error:`Invalid argument type: ${type}, valid ones: ${validTypes}`});
+    */
+
     /*
     if(!req.files || Object.keys(req.files).length===0){
       return res.status(400).json({error:'No files were selected'});
@@ -48,9 +51,12 @@ export class FileUploadController {
 
   uploadMultipleFiles = ( req: Request, res: Response ) => {
     const type=req.params.type;
+    /*
     const validTypes=['users','products','categories'];
     if(!validTypes.includes(type))
-      throw res.status(400).json({error:`Invalid argument type: ${type}, valid ones: ${validTypes}`});
+      return res.status(400)
+        .json({error:`Invalid argument type: ${type}, valid ones: ${validTypes}`});
+    */
 
     const files=req.body.files as UploadedFile[];
     
